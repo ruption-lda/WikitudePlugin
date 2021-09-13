@@ -340,5 +340,15 @@
 
 
 	/* Export a new WikitudePlugin instance */
-	var wikitudePlugin = new WikitudePlugin();
-	module.exports = wikitudePlugin;
+	/*var wikitudePlugin = new WikitudePlugin();
+	module.exports = wikitudePlugin;*/
+
+// Installation constructor that binds WkitudePlugin to window
+	WikitudePlugin.install = function () {
+		if (!window.plugins) {
+			window.plugins = {};
+		}
+		window.plugins.wikitudePlugin = new WikitudePlugin();
+		return window.plugins.wikitudePlugin;
+	};
+	cordova.addConstructor(WikitudePlugin.install);
